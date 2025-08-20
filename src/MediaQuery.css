@@ -1,0 +1,46 @@
+@media screen and (max-width:991px) {
+    .nav-toggle{
+        display: block;
+    }
+
+    .nav-list{
+        display: none;
+    }
+
+    .right-side{
+        display: none;
+    }
+}
+
+
+@media screen and (max-width:768px) {
+    .main-container{
+        flex-direction: column-reverse;
+    }
+
+    #main-image{
+        width: 700px;
+    }
+
+    .left-text{
+        width: 100vw;
+        text-align: center;
+    }
+
+    .permission-section{
+        padding-block: 10px;
+    }
+
+    .content-management{
+        padding-block: 10px;
+        margin-bottom: 40px;
+    }
+
+    .head-diff{
+        padding-block: 10px;
+    }
+     .card{
+        width: 180px;
+        max-height: 100%;
+     }
+}
