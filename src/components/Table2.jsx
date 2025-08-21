@@ -1,121 +1,3 @@
-// import React from "react";
-// import { useEffect } from "react";
-// import { useState } from "react";
-// import Navbar from "./Navbar";
-
-// function Table() {
-//   const [carts, setCarts] = useState();
-//   const [loading, setLoading] = useState(false);
-
-//   useEffect(() => {
-//     setLoading(true);
-//     fetch("https://dummyjson.com/carts")
-//       .then((res) => res.json())
-//       .then((json) => setCarts(json.carts))
-//       .finally(() => {
-//         setLoading(false);
-//       });
-//   }, []);
-
-// //   ar.map((ele) => console.log(111));
-
-//   return (
-//     <div className="App">
-//       {loading ? (
-//         <div>Loading...</div>
-//       ) : (
-//         <>
-//           <Navbar />
-//           <h1>Carts</h1>
-//           <table border={1}>
-//             <thead>
-//               <tr>
-//                 <th>Title</th>
-//                 <th>Price</th>
-//                 <th>Quantity</th>
-//                 <th>Total</th>
-//                 <th>Discount Percentage</th>
-//                 <th>Discounted Total</th>
-//               </tr>
-//             </thead>
-
-//             {carts === undefined && <p>No Data</p>}
-//             {carts?.map((item) =>
-//               item.products.map((ele) => (
-//                 <tr key={ele.id}>
-//                   <td>{ele.title}</td>
-//                   <td>{ele.price}</td>
-//                   <td>{ele.quantity}</td>
-//                   <td>{ele.total}</td>
-//                   <td>{ele.discountPercentage}</td>
-//                   <td>{ele.discountedTotal}</td>
-//                 </tr>
-//               ))
-//             )}
-//           </table>
-//         </>
-//       )}
-//     </div>
-//   );
-// }
-
-// export default Table;
-
-// import React, { useEffect, useState } from "react";
-
-// function Table2() {
-//   const [carts, setCarts] = useState();
-//   const [loading, setLoading] = useState(false);
-
-//   useEffect(() => {
-//     setLoading(true);
-//     fetch("https://dummyjson.com/carts")
-//       .then((res) => res.json())
-//       .then((json) => setCarts(json.carts))
-//       .finally(() => {
-//         setLoading(false);
-//       });
-//   }, []);
-//   return (
-//     <div>
-//       {loading ? (
-//         <div>Loading...</div>
-//       ) : (
-//         <>
-//           <h2>My Carts</h2>
-//           <table border={1}>
-//             <thead>
-//               <tr>
-//                 <th>Title</th>
-//                 <th>price</th>
-//                 <th>quantity</th>
-//                 <th>total</th>
-//                 <th>discount Percentage</th>
-//                 <th>discountedTotal</th>
-//               </tr>
-//             </thead>
-
-//             {carts?.map((item) =>
-//               item.products.map((ele) => (
-//                 <tr key={ele.id}>
-//                   <td>{ele.title}</td>
-//                   <td>{ele.price}</td>
-//                   <td>{ele.quantity}</td>
-//                   <td>{ele.total}</td>
-//                   <td>{ele.discountPercentage}</td>
-//                   <td>{ele.discountedTotal}</td>
-//                 </tr>
-//               ))
-//             )}
-//           </table>
-//         </>
-//       )}
-//     </div>
-//   );
-// }
-
-// export default Table2;
-
 import React, { useContext, useEffect, useState } from "react";
 import { CartProvider } from "../context/cart";
 import { CartContext } from "../context/cart";
@@ -125,8 +7,12 @@ import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 
 const Table2 = () => {
   const [showModal, setShowModal] = useState(false);
+  const [open, setOpen] = useState(false);
 
-  const toggle = () => setShowModal((prev) => !prev);
+  const toggle = () => {
+    setShowModal((prev) => !prev);
+    setOpen(true);
+  };
 
   return (
     <CartProvider>
@@ -139,7 +25,7 @@ function Table2Content({ toggle, showModal }) {
   const [carts, setCarts] = useState();
   const [loading, setLoading] = useState(false);
 
-  const { cartItems, addToCart } = useContext(CartContext);
+  const { cartItems, addToCart, removeOne } = useContext(CartContext);
 
   useEffect(() => {
     setLoading(true);
@@ -154,6 +40,10 @@ function Table2Content({ toggle, showModal }) {
   const handleAddTocart = (item) => {
     addToCart(item);
     toggle();
+  };
+
+  const handleRemoveOne = (id) => {
+    removeOne(id);
   };
 
   return (
@@ -185,7 +75,9 @@ function Table2Content({ toggle, showModal }) {
         <div className="right-side">
           {!showModal && (
             <div className="bml">
-              <button onClick={toggle}><FontAwesomeIcon icon={faCartShopping} /></button>
+              <button onClick={toggle}>
+                <FontAwesomeIcon icon={faCartShopping} />
+              </button>
               <div className="za">
                 <span className="qw">{cartItems.length}</span>
               </div>
@@ -195,40 +87,15 @@ function Table2Content({ toggle, showModal }) {
       </div>
 
       <Cart showModal={showModal} toggle={toggle} />
+      <Cart />
+
       {loading ? (
         <div>Loading....</div>
       ) : (
         <>
-          {/* <table border={1}>
-            <thead>
-              <tr>
-                <th>Title</th>
-                <th>"price"</th>
-                <th>"quantity"</th>
-                <th>"total"</th>
-                <th>"discountPercentage"</th>
-                <th>"discountedTotal"</th>
-              </tr>
-            </thead>
-
-            {carts?.map((item) =>
-              item.products.map((ele) => (
-               
-                  <tr key={ele.id}>
-                  <td>{ele.title}</td>
-                  <td>{ele.price}</td>
-                  <td>{ele.quantity}</td>
-                  <td>{ele.total}</td>
-                  <td>{ele.discountPercentage}</td>
-                  <td>{ele.discountedTotal}</td>
-                </tr>
-               
-                
-              ))
-            )}
-          </table> */}
-
-          <div className="cop">
+          {
+            !showModal && (
+              <div className="cop">
             {carts?.map((item) =>
               item.products.map((ele) => (
                 <div className="wrapper" key={ele.id}>
@@ -236,7 +103,7 @@ function Table2Content({ toggle, showModal }) {
                     <img className="gfe" src={ele.thumbnail} />
                   </div>
                   <div className="box a">
-                    {ele.title} ({ele.quantity}){" "}
+                    {ele.title} ({ele.quantity})
                   </div>
                   <div className="box b ">
                     <div>
@@ -245,14 +112,22 @@ function Table2Content({ toggle, showModal }) {
                     </div>
                   </div>
                   <div className="box c">
-                    <button onClick={() => handleAddTocart(ele)} className="btn">
-                      Add To Cart
-                    </button>
+                    {cartItems.some((cu) => cu.id === ele.id) ? (
+                      <button onClick={() => handleRemoveOne(ele.id)} className="btn remove">
+                        Remove From Cart
+                      </button>
+                    ) : (
+                      <button onClick={() => handleAddTocart(ele)} className="btn add">
+                        Add To Cart
+                      </button>
+                    )}
                   </div>
                 </div>
               ))
             )}
           </div>
+            )
+          }
         </>
       )}
     </>

@@ -76,27 +76,26 @@ body {
 }
 
 .right-side {
- display: flex;
-margin-right: 20px;
-align-items: center;
-justify-content: center;
+  display: flex;
+  margin-right: 20px;
+  align-items: center;
+  justify-content: center;
 }
 
-.bml{
+.bml {
   display: flex;
   align-items: center;
-
 }
 
-.bml button{
+.bml button {
   padding: 10px;
   border: none;
   border-radius: 70px;
-background-color: #f3eeee;
-cursor: pointer;
+  background-color: #f3eeee;
+  cursor: pointer;
 }
 
-.za{
+.za {
   font-size: 20px;
   font-weight: bold;
   position: relative;
@@ -503,8 +502,10 @@ cursor: pointer;
   background-color: #d4d1d1;
   cursor: pointer;
   border-radius: 10px;
+  margin-bottom: 20px;
+  text-align: center;
 }
-.bage{
+.bage {
   padding: 0 1px;
   background-color: red;
   color: wheat;
@@ -512,10 +513,12 @@ cursor: pointer;
   font-weight: bold;
   border-radius: 5px;
   text-align: left;
-  
 }
 .bh {
+  width: 100%;
+  flex-direction: column;
   display: flex;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .der {
@@ -524,18 +527,21 @@ cursor: pointer;
   font-size: 12px;
 }
 .mlk {
-  grid-column: 1;
-  width: 20px;
-  align-items: center;
-  justify-content: center;
+  grid-column: 6/ span 2;
+  grid-row: 1/span 1;
 }
 
 .nj {
   display: flex;
-  margin-left: 50px;
-  gap: 20px;
+  gap: 10px;
 }
 
+.nj button {
+  padding: 0px 10px;
+  font-size: 10px;
+  text-align: left;
+  word-wrap: break-word;
+}
 .ko {
   margin-left: 50%;
 }
@@ -551,14 +557,17 @@ cursor: pointer;
 }
 
 .sa {
-  grid-column: 1 / span 1;
-  grid-row: 2 / span 2;
-  font-size: 15px;
+  grid-column: 2 / span 4;
+  grid-row: 1 / span 1;
+  font-size: 19px;
+  font-weight: bold;
 }
 
 .wq {
-  grid-column: 1 / span 1;
+  grid-column: 10 / span 1;
   grid-row: 3 / span 1;
+  font-weight: bold;
+  font-size: 19px;
 }
 
 .ki {
@@ -572,8 +581,116 @@ cursor: pointer;
 }
 
 .nht {
- 
-  width: 70px;
-  margin: 10px 50px;
+  width: 40px;
+  margin-left: 30px;
   max-width: 100%;
+}
+
+.wrapperi {
+  overflow: hidden;
+  padding: 10px 20px;
+  margin: 10px 20px;
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: 200px 200px 100px 100px 100px 100px;
+  grid-template-rows: 50px 50px;
+  color: #444;
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  top: 0;
+  transition: top ease 0.5s;
+}
+.nmm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+
+.df {
+  border: 1px solid black;
+  margin-top: 20px;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  
+}
+
+.uppaer-items button {
+  display: block;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  align-items: center;
+  width: 400px;
+  padding: 10px;
+  border: none;
+  background-color: #444;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.vvv{
+  display: flex;
+  flex-direction: column;
+  font-size: 19px;
+  text-align: center;
+  
+}
+
+.vvv input{
+  padding: 10px 10px;
+  margin-bottom: 10px;
+}
+
+.ccc{
+  display: flex;
+  margin-left: 10px;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.pay{
+  padding: 10px 10px;
+  border: none;
+  margin-bottom: 10px;
+  background-color: #5f80a3;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+}
+
+.fe{
+  text-align: center;
+}
+
+
+.nh{
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  width: 400px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: auto;
+  margin-top: 20px;
+  font-size: 20px;
+  background-color: #d4d1d1;
+
+}
+
+.dee{
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+.dee input{
+  margin-bottom: 10px;
+  padding: 15px;
+  border-radius: 15px;
+border: none;
+
 }

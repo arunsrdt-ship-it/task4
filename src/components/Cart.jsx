@@ -1,10 +1,16 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CartContext } from "../context/cart";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
 
 function Cart({ showModal, toggle }) {
+  const navigate = useNavigate();
+
   const { cartItems, addToCart, removeFromCart, clearCart, getCartTotal } = useContext(CartContext);
 
+  const handleClick = () => {
+    navigate("/pay");
+  };
   if (!showModal) return null;
   return (
     <div className="ki">
@@ -16,7 +22,7 @@ function Cart({ showModal, toggle }) {
       </div>
       <div className="bh">
         {cartItems.map((item) => (
-          <div className="wrapper" key={item.id}>
+          <div className="wrapperi" key={item.id}>
             <div className="box cd">
               <img className="nht" src={item.thumbnail} alt={item.title} />
             </div>
@@ -26,7 +32,7 @@ function Cart({ showModal, toggle }) {
             </div>
             <div className="box wq">${item.price}</div>
 
-            <div className="mlk">
+            <div className="box mlk">
               <div className="nj">
                 <button
                   onClick={() => {
@@ -48,9 +54,15 @@ function Cart({ showModal, toggle }) {
         ))}
       </div>
       {cartItems.length > 0 ? (
-        <div>
+        <div >
           <h1 className="ko">Total: ${getCartTotal()} </h1>
-          
+
+          <div className="vf">
+            <button className="bnm" onClick={handleClick} disabled={cartItems.length === 0 || getCartTotal() === 0}>
+              Proceed to Payment
+            </button>
+          </div>
+
           <div className="vf">
             <button
               className="bnm"

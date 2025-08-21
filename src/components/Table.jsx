@@ -54,84 +54,108 @@
 
 // // export default Table;
 
-// import React, { useEffect, useState } from "react";
-
-// function Table() {
-//   const [carts, setCarts] = useState();
-//   const [loading, setLoading] = useState(false);
-
-//   useEffect(() => {
-//     setLoading(true);
-//     fetch("https://dummyjson.com/products")
-//       .then((res) => res.json())
-//       .then((json) => setCarts(json.products))
-//       .finally(() => {
-//         setLoading(false);
-//       });
-//   }, []);
-//   return (
-//     <div>
-//       {loading ? (
-//         <div>Loading....</div>
-//       ) : (
-//         <>
-//             <table border={1}>
-//           <thead>
-//             <tr>
-//               <th>"title"</th>
-//               <th>description</th>
-//               <th>"category"</th>
-//               <th>""price""</th>
-//               <th>""discountPercentage""</th>
-//               <th>""rating""</th>
-//               <th>"""stock"""</th>
-//             </tr>
-
-//             {carts?.map((item) => (
-//               <tr key={item.id}>
-//                 <td>{item.title}</td>
-//                 <td>{item.description}</td>
-//                 <td>{item.category}</td>
-//                 <td>{item.price}</td>
-//                 <td>{item.discountPercentage}</td>
-//                 <td>{item.rating}</td>
-//                 <td>{item.stock}</td>
-//               </tr>
-//             ))}
-//           </thead>
-//         </table>
-//         </>
-//       )}
-//     </div>
-//   );
-// }
-
-// export default Table;
-
 import React, { useEffect, useState } from "react";
-import Navbar from "./Navbar";
+import { useNavigate } from "react-router-dom";
 
 function Table() {
-  const [users, setUsers] = useState();
+  const [carts, setCarts] = useState();
   const [loading, setLoading] = useState(false);
+  const [selected, setSelected] = useState({ title: "", price: "" });
+
+  const [showModal, setShowModal] = useState(false);
+
+  const toggle = (item) => {
+    if (item) {
+      setSelected({ title: item.title, price: item.price });
+    }
+    setShowModal((prev) => !prev);
+  };
 
   useEffect(() => {
     setLoading(true);
-    fetch("https://jsonplaceholder.typicode.com/todos")
+    fetch("https://dummyjson.com/products")
       .then((res) => res.json())
-      .then((json) => setUsers(json))
+      .then((json) => setCarts(json.products))
       .finally(() => {
         setLoading(false);
       });
   }, []);
   return (
     <div>
-      <Navbar />
+      {showModal && (
+        <form className="nh">
+          <div className="dee">
+            <label>
+              Title:
+              <input type="title" required value={selected.title} onChange={(e) => setSelected(...selected, { title: e.target.value })} />
+            </label>
+            <div>
+              <label>
+                Price:
+                <input type="text" required value={selected.price} onChange={(e) => setSelected(...selected, { price: e.target.value })} />
+              </label>
+            </div>
+          </div>
+        </form>
+      )}
+
       {loading ? (
-        <h2>Loading...</h2>
+        <div>Loading....</div>
       ) : (
         <>
-          {/* <table border={1}>
+          {!showModal && (
+            <table border={1}>
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Price</th>
+                  <th>Edit</th>
+                </tr>
+
+                {carts?.map((item) => (
+                  <tr key={item.id}>
+                    <td>{item.title}</td>
+                    <td>{item.price}</td>
+
+                    <button onClick={() => toggle(item)}>Edit</button>
+                  </tr>
+                ))}
+              </thead>
+            </table>
+          )}  
+        </>
+      )}
+    </div>
+  );
+}
+
+export default Table;
+
+// import React, { useEffect, useState } from "react";
+// import Navbar from "./Navbar";
+
+// function Table() {
+//   const [users, setUsers] = useState();
+//   const [loading, setLoading] = useState(false);
+
+//   useEffect(() => {
+//     setLoading(true);
+//     fetch("https://jsonplaceholder.typicode.com/todos")
+//       .then((res) => res.json())
+//       .then((json) => setUsers(json))
+//       .finally(() => {
+//         setLoading(false);
+//       });
+//   }, []);
+//   return (
+//     <div>
+//       <Navbar />
+//       {loading ? (
+//         <h2>Loading...</h2>
+//       ) : (
+//         <>
+{
+  /* <table border={1}>
             <thead>
               <tr>
                 <th>UserId</th>
@@ -147,9 +171,11 @@ function Table() {
                 <td>{item.completed}</td>
               </tr>
             ))}
-          </table> */}
+          </table> */
+}
 
-          {/* {users?.map((item) => (
+{
+  /* {users?.map((item) => (
             {/* <div className="mobo">
               <div className="card-container" key={item.id}>
               <div className="card">
@@ -162,10 +188,11 @@ function Table() {
                 </div>
               </div>
             </div>
-            </div> */}
+            </div> */
+}
 
-            
-             <div className="cop">
+{
+  /* <div className="cop">
                {
                 users?.map((item) => (
                  <div className="done">
@@ -182,8 +209,11 @@ function Table() {
            
         </>
       )}
-    </div>
-  );
+    </div> */
+}
+{
+  /* );
 }
 
-export default Table;
+export default Table; */
+}
