@@ -56,13 +56,32 @@
 
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import AddSVG from "../assets/plus-circle.svg"
 
 function Table() {
   const [carts, setCarts] = useState();
   const [loading, setLoading] = useState(false);
-  const [selected, setSelected] = useState({ title: "", price: "" });
+  const [selected, setSelected] = useState({});
 
   const [showModal, setShowModal] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setSelected((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleAdd = (e) => {
+    e.preventDefault();
+    console.log(selected.title, selected.price);
+   
+  };
+
+  const handleCancel =() => {
+    setShowModal(false)
+  }
 
   const toggle = (item) => {
     if (item) {
@@ -76,24 +95,36 @@ function Table() {
     fetch("https://dummyjson.com/products")
       .then((res) => res.json())
       .then((json) => setCarts(json.products))
+
       .finally(() => {
         setLoading(false);
       });
   }, []);
   return (
     <div>
+      <div className="grew">
+        <button className="vffv" onClick={() => toggle()}>
+          <img src={AddSVG}/>
+        </button>
+      </div>
       {showModal && (
-        <form className="nh">
+        <form className="nh" onClick={handleAdd}>
           <div className="dee">
             <label>
               Title:
-              <input type="title" required value={selected.title} onChange={(e) => setSelected(...selected, { title: e.target.value })} />
+              <input name="title" type="title" required value={selected.title || ""} onChange={handleChange} />
             </label>
             <div>
               <label>
                 Price:
-                <input type="text" required value={selected.price} onChange={(e) => setSelected(...selected, { price: e.target.value })} />
+                <input name="price" type="text" required value={selected.price || ""} onChange={handleChange} />
               </label>
+            </div>
+            <div>
+              <button className="dreeee" onClick={handleCancel}>Cancel</button>
+              <button className="dreeee" type="submit" >
+                Add
+              </button>
             </div>
           </div>
         </form>
@@ -103,26 +134,29 @@ function Table() {
         <div>Loading....</div>
       ) : (
         <>
-          {!showModal && (
-            <table border={1}>
-              <thead>
+          {
+            <table className="dew">
+              <thead className="header-table">
                 <tr>
                   <th>Title</th>
                   <th>Price</th>
                   <th>Edit</th>
                 </tr>
-
-                {carts?.map((item) => (
-                  <tr key={item.id}>
-                    <td>{item.title}</td>
-                    <td>{item.price}</td>
-
-                    <button onClick={() => toggle(item)}>Edit</button>
-                  </tr>
-                ))}
               </thead>
+              {carts?.map((item) => (
+                <tr className="tre" key={item.id}>
+                  <td>{item.title}</td>
+                  <td>₹{item.price}</td>
+
+                  <td>
+                    <button className="cdf" onClick={() => toggle(item)}>
+                      Edit
+                    </button>
+                  </td>
+                </tr>
+              ))}
             </table>
-          )}  
+          }
         </>
       )}
     </div>

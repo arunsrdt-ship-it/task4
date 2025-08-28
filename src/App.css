@@ -527,8 +527,8 @@ body {
   font-size: 12px;
 }
 .mlk {
-  grid-column: 6/ span 2;
-  grid-row: 1/span 1;
+  grid-column: 6 / span 2;
+  grid-row: 1 / span 1;
 }
 
 .nj {
@@ -614,7 +614,6 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  
 }
 
 .uppaer-items button {
@@ -631,20 +630,19 @@ body {
   cursor: pointer;
 }
 
-.vvv{
+.vvv {
   display: flex;
   flex-direction: column;
   font-size: 19px;
   text-align: center;
-  
 }
 
-.vvv input{
+.vvv input {
   padding: 10px 10px;
   margin-bottom: 10px;
 }
 
-.ccc{
+.ccc {
   display: flex;
   margin-left: 10px;
   align-items: center;
@@ -652,7 +650,7 @@ body {
   margin-bottom: 20px;
 }
 
-.pay{
+.pay {
   padding: 10px 10px;
   border: none;
   margin-bottom: 10px;
@@ -662,35 +660,104 @@ body {
   cursor: pointer;
 }
 
-.fe{
+.fe {
   text-align: center;
 }
 
-
-.nh{
+.nh {
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
+
   width: 400px;
   align-items: center;
   justify-content: center;
   text-align: center;
   margin: auto;
-  margin-top: 20px;
+  margin-top: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
   font-size: 20px;
   background-color: #d4d1d1;
-
+  border-radius: 10px;
 }
 
-.dee{
+.dee {
   margin-bottom: 20px;
   margin-top: 10px;
 }
 
-.dee input{
+.dee input {
   margin-bottom: 10px;
   padding: 15px;
   border-radius: 15px;
-border: none;
+  border: none;
+}
+.cdf {
+  padding: 15px 35px;
+  border: none;
+  font-weight: 600;
+  border-radius: 20px;
+  background-color: #cbe0e5;
+  font-size: 16px;
+  cursor: pointer;
+}
+.grew {
+  display: flex;
+  padding: 10px;
+}
 
+.vffv:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.vffv {
+  margin: 0 auto;
+  padding: 15px 35px;
+  border: none;
+  font-weight: 600;
+  border-radius: 20px;
+  background-color: #cbe0e5;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.vffv img{ 
+  width: 30px;
+}
+.cdf:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.dew {
+  margin: 0 auto;
+  border-radius: 2px;
+  font-size: 18px;
+}
+
+.header-table th {
+  padding: 16px 80px;
+  background-color: black;
+  color: white;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.tre td {
+  padding: 16px 80px;
+  align-items: center;
+  justify-content: center;
+  background-color: #ebe8e8;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.dreeee{
+  margin: 0 auto;
+  padding: 15px 35px;
+  border: none;
+  font-weight: 600;
+  border-radius: 20px;
+  background-color: #cbe0e5;
+  font-size: 16px;
+  cursor: pointer;
 }

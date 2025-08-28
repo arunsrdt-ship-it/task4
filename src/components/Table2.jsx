@@ -93,41 +93,39 @@ function Table2Content({ toggle, showModal }) {
         <div>Loading....</div>
       ) : (
         <>
-          {
-            !showModal && (
-              <div className="cop">
-            {carts?.map((item) =>
-              item.products.map((ele) => (
-                <div className="wrapper" key={ele.id}>
-                  <div className="box i">
-                    <img className="gfe" src={ele.thumbnail} />
-                  </div>
-                  <div className="box a">
-                    {ele.title} ({ele.quantity})
-                  </div>
-                  <div className="box b ">
-                    <div>
-                      <span className="price">${ele.price + " "}</span>
-                      <span className="original-price"> ${ele.total}</span> <span className="dis">({ele.discountPercentage}% OFF)</span>
+          {!showModal && (
+            <div className="cop">
+              {carts?.map((item) =>
+                item.products.map((ele) => (
+                  <div className="wrapper" key={ele.id}>
+                    <div className="box i">
+                      <img className="gfe" src={ele.thumbnail} />
+                    </div>
+                    <div className="box a">
+                      {ele.title} ({ele.quantity})
+                    </div>
+                    <div className="box b ">
+                      <div>
+                        <span className="price">${ele.price + " "}</span>
+                        <span className="original-price"> ${ele.total}</span> <span className="dis">({ele.discountPercentage}% OFF)</span>
+                      </div>
+                    </div>
+                    <div className="box c">
+                      {cartItems.some((cu) => cu.id === ele.id) ? (
+                        <button onClick={() => handleRemoveOne(ele.id)} className="btn remove">
+                          Remove From Cart
+                        </button>
+                      ) : (
+                        <button onClick={() => handleAddTocart(ele)} className="btn add">
+                          Add To Cart
+                        </button>
+                      )}
                     </div>
                   </div>
-                  <div className="box c">
-                    {cartItems.some((cu) => cu.id === ele.id) ? (
-                      <button onClick={() => handleRemoveOne(ele.id)} className="btn remove">
-                        Remove From Cart
-                      </button>
-                    ) : (
-                      <button onClick={() => handleAddTocart(ele)} className="btn add">
-                        Add To Cart
-                      </button>
-                    )}
-                  </div>
-                </div>
-              ))
-            )}
-          </div>
-            )
-          }
+                ))
+              )}
+            </div>
+          )}
         </>
       )}
     </>
