@@ -56,12 +56,14 @@
 
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import AddSVG from "../assets/plus-circle.svg"
+import AddSVG from "../assets/plus-circle.svg";
 
 function Table() {
   const [carts, setCarts] = useState();
   const [loading, setLoading] = useState(false);
   const [selected, setSelected] = useState({});
+  const [isEdited, setIsEdited] = useState(null);
+  const [searchHoga, setSearchHoga] = useState("");
 
   const [showModal, setShowModal] = useState(false);
 
@@ -75,17 +77,23 @@ function Table() {
 
   const handleAdd = (e) => {
     e.preventDefault();
-    console.log(selected.title, selected.price);
-   
+    if (isEdited !== null) {
+      setCarts((prevJoItem) => prevJoItem.map((item) => (item.id === isEdited.id ? { ...item, title: selected.title, price: selected.price } : item)));
+    }
+
+    setIsEdited(null);
+    setSelected({ title: "", price: "" });
+    setShowModal(true);
   };
 
-  const handleCancel =() => {
-    setShowModal(false)
-  }
+  const handleCancel = () => {
+    setShowModal(false);
+  };
 
   const toggle = (item) => {
     if (item) {
       setSelected({ title: item.title, price: item.price });
+      setIsEdited(item);
     }
     setShowModal((prev) => !prev);
   };
@@ -104,15 +112,15 @@ function Table() {
     <div>
       <div className="grew">
         <button className="vffv" onClick={() => toggle()}>
-          <img src={AddSVG}/>
+          <img src={AddSVG} />
         </button>
       </div>
       {showModal && (
-        <form className="nh" onClick={handleAdd}>
+        <form className="nh" onSubmit={handleAdd}>
           <div className="dee">
             <label>
               Title:
-              <input name="title" type="title" required value={selected.title || ""} onChange={handleChange} />
+              <input name="title" type="text" required value={selected.title || ""} onChange={handleChange} />
             </label>
             <div>
               <label>
@@ -121,8 +129,10 @@ function Table() {
               </label>
             </div>
             <div>
-              <button className="dreeee" onClick={handleCancel}>Cancel</button>
-              <button className="dreeee" type="submit" >
+              <button type="button" className="dreeee" onClick={handleCancel}>
+                Cancel
+              </button>
+              <button className="dreeee" type="submit">
                 Add
               </button>
             </div>
@@ -135,6 +145,11 @@ function Table() {
       ) : (
         <>
           {
+            <div className="vffff">
+              <input className="vgbg" type="text" placeholder="Search Your Element...." value={searchHoga} onChange={(e) => setSearchHoga(e.target.value)} />
+            </div>
+          }
+          {
             <table className="dew">
               <thead className="header-table">
                 <tr>
@@ -143,18 +158,20 @@ function Table() {
                   <th>Edit</th>
                 </tr>
               </thead>
-              {carts?.map((item) => (
-                <tr className="tre" key={item.id}>
-                  <td>{item.title}</td>
-                  <td>₹{item.price}</td>
+              {carts
+                ?.filter((item) => item.title.toLowerCase().includes(searchHoga))
+                .map((item) => (
+                  <tr className="tre" key={item.id}>
+                    <td>{item.title}</td>
+                    <td>₹{item.price}</td>
 
-                  <td>
-                    <button className="cdf" onClick={() => toggle(item)}>
-                      Edit
-                    </button>
-                  </td>
-                </tr>
-              ))}
+                    <td>
+                      <button className="cdf" onClick={() => toggle(item)}>
+                        Edit
+                      </button>
+                    </td>
+                  </tr>
+                ))}
             </table>
           }
         </>

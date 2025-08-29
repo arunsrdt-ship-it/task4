@@ -722,7 +722,7 @@ body {
   cursor: pointer;
 }
 
-.vffv img{ 
+.vffv img {
   width: 30px;
 }
 .cdf:hover {
@@ -751,7 +751,7 @@ body {
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
-.dreeee{
+.dreeee {
   margin: 0 auto;
   padding: 15px 35px;
   border: none;
@@ -760,4 +760,17 @@ body {
   background-color: #cbe0e5;
   font-size: 16px;
   cursor: pointer;
+}
+
+.vgbg {
+  padding: 15px 60px;
+  border: none;
+  background-color: #f1ebeb;
+  font-size: 17px;
+}
+
+.vffff{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
