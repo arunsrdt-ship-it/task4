@@ -1,65 +1,8 @@
-// // import React from "react";
-// // import { useEffect } from "react";
-// // import { useState } from "react";
-// // import Navbar from "./Navbar";
-
-// // function Table() {
-// //   const [carts, setCarts] = useState();
-// //   const [loading, setLoading] = useState(false);
-
-// //   useEffect(() => {
-// //     setLoading(true);
-// //     fetch("https://dummyjson.com/products")
-// //       .then((res) => res.json())
-// //       .then((json) => setCarts(json.products))
-// //       .finally(() => {
-// //         setLoading(false);
-// //       });
-// //   }, []);
-
-// //   console.log("first", carts);
-// //   return (
-// //     <div className="App">
-// //       {loading ? (
-// //         <div>Loading...</div>
-// //       ) : (
-// //         <>
-// //         <Navbar />
-// //           <h1>Carts</h1>
-// //           <table border={1}>
-// //             <thead>
-// //               <tr>
-// //                 <th>Title</th>
-// //                 <th>Description</th>
-// //                 <th>Category</th>
-// //                 <th>Price</th>
-// //               </tr>
-// //             </thead>
-
-// //             {carts === undefined && <p>No Data</p>}
-// //             {carts?.map((item) => (
-// //               <tr key={item.id}>
-// //                 <td>{item.title}</td>
-// //                 <td>{item.description}</td>
-// //                 <td>{item.category}</td>
-// //                 <td>{item.price}</td>
-// //               </tr>
-// //             ))}
-// //           </table>
-// //         </>
-// //       )}
-// //     </div>
-// //   );
-// // }
-
-// // export default Table;
-
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import AddSVG from "../assets/plus-circle.svg";
 
 function Table() {
-  const [carts, setCarts] = useState();
+  const [carts, setCarts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selected, setSelected] = useState({});
   const [isEdited, setIsEdited] = useState(null);
@@ -74,11 +17,21 @@ function Table() {
       [name]: value,
     }));
   };
+  const normalizedSearch = searchHoga.toLowerCase();
 
   const handleAdd = (e) => {
     e.preventDefault();
     if (isEdited !== null) {
       setCarts((prevJoItem) => prevJoItem.map((item) => (item.id === isEdited.id ? { ...item, title: selected.title, price: selected.price } : item)));
+    } else {
+      setCarts((prevItems) => [
+        {
+          id: Date.now(),
+          title: selected.title,
+          price: selected.price,
+        },
+        ...prevItems,
+      ]);
     }
 
     setIsEdited(null);
@@ -110,10 +63,18 @@ function Table() {
   }, []);
   return (
     <div>
-      <div className="grew">
-        <button className="vffv" onClick={() => toggle()}>
-          <img src={AddSVG} />
-        </button>
+      <div className="bhop">
+        <div className="vffff">
+          <input className="vgbg" type="text" placeholder="Search Your Element...." value={searchHoga} onChange={(e) => setSearchHoga(e.target.value)} />
+        </div>
+
+        {!showModal && (
+          <div className="grew">
+            <button className="vffv" onClick={() => toggle()}>
+              <img src={AddSVG} />
+            </button>
+          </div>
+        )}
       </div>
       {showModal && (
         <form className="nh" onSubmit={handleAdd}>
@@ -145,11 +106,6 @@ function Table() {
       ) : (
         <>
           {
-            <div className="vffff">
-              <input className="vgbg" type="text" placeholder="Search Your Element...." value={searchHoga} onChange={(e) => setSearchHoga(e.target.value)} />
-            </div>
-          }
-          {
             <table className="dew">
               <thead className="header-table">
                 <tr>
@@ -159,7 +115,7 @@ function Table() {
                 </tr>
               </thead>
               {carts
-                ?.filter((item) => item.title.toLowerCase().includes(searchHoga))
+                ?.filter((item) => item.title.toLowerCase().includes(normalizedSearch))
                 .map((item) => (
                   <tr className="tre" key={item.id}>
                     <td>{item.title}</td>
@@ -181,90 +137,3 @@ function Table() {
 }
 
 export default Table;
-
-// import React, { useEffect, useState } from "react";
-// import Navbar from "./Navbar";
-
-// function Table() {
-//   const [users, setUsers] = useState();
-//   const [loading, setLoading] = useState(false);
-
-//   useEffect(() => {
-//     setLoading(true);
-//     fetch("https://jsonplaceholder.typicode.com/todos")
-//       .then((res) => res.json())
-//       .then((json) => setUsers(json))
-//       .finally(() => {
-//         setLoading(false);
-//       });
-//   }, []);
-//   return (
-//     <div>
-//       <Navbar />
-//       {loading ? (
-//         <h2>Loading...</h2>
-//       ) : (
-//         <>
-{
-  /* <table border={1}>
-            <thead>
-              <tr>
-                <th>UserId</th>
-                <th>Title</th>
-                <th>Completed</th>
-              </tr>
-            </thead>
-
-            {users?.map((item) => (
-              <tr key={item.id}>
-                <td>{item.userId}</td>
-                <td>{item.title}</td>
-                <td>{item.completed}</td>
-              </tr>
-            ))}
-          </table> */
-}
-
-{
-  /* {users?.map((item) => (
-            {/* <div className="mobo">
-              <div className="card-container" key={item.id}>
-              <div className="card">
-                <div className="card-content">
-                  <h2 className="card-title">{item.userId}</h2>
-                  <p className="card-description">
-                    {item.title}
-                  </p>
-                  <button className="card-button">Read More...</button>
-                </div>
-              </div>
-            </div>
-            </div> */
-}
-
-{
-  /* <div className="cop">
-               {
-                users?.map((item) => (
-                 <div className="done">
-                   <div className="wrappers">
-                    <div className="boxi" key={item.id} >
-                    <div className="box f">{item.userId}</div>
-                    <div className="box g">{item.title}</div>
-                  </div>
-                  </div>
-                 </div>
-                ))
-              }
-             </div>
-           
-        </>
-      )}
-    </div> */
-}
-{
-  /* );
-}
-
-export default Table; */
-}
