@@ -123,7 +123,7 @@ function Table() {
 
                     <td>
                       <button className="cdf" onClick={() => toggle(item)}>
-                        Edit
+                        Action
                       </button>
                     </td>
                   </tr>
